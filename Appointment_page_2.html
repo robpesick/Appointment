@@ -1,0 +1,33 @@
+<html>
+<head>
+	<script src="https://api.glia.com/salemove_integration.js"></script>
+	<title>Cortex Financial Appointments</title>
+</head>
+<h1><span>Cortex Financial Appointment Page</span></h1>
+<p>This is the page where the appointment will happen. The Glia script is deployed to this page.</p>
+<body>
+	<script>
+	var FormName = localStorage.getItem("apptname");
+	var FormEmail = localStorage.getItem("apptemail");
+  var FormPhone = localStorage.getItem("apptphone");
+	console.log("Name:" + FormName); 
+	console.log("Email:" + FormEmail);
+  console.log("Phone:" + FormPhone); 
+</script>
+  <script>
+  sm.getApi({version: 'v1'}).then(function(glia){
+        glia.updateInformation({
+            name:  FormName,
+            email: FormEmail,
+            phone: FormPhone,
+            customAttributes: {
+                ScheduledAppointment:'YES'
+                }
+            }).then(function(){
+            }).catch(function(error){
+            });
+        });
+  </script>
+ <button onclick="history.back()">Go Back</button>
+</body>
+</html>
